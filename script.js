@@ -10,14 +10,13 @@ function init() {
   const clearListBtn = document.querySelector("#clearList");
   submitBtn.addEventListener("click", submitList);
   clearListBtn.addEventListener("click", function () {
-    createShoppingList(clearList()); // Pass the cleared list to update the DOM
+    printShoppingList(clearList());
   });
   sortNameBtn.addEventListener("click", function () {
-    createShoppingList(sortName()); // Pass the returned sorted list
+    printShoppingList(sortName());
   });
-
   sortPriceBtn.addEventListener("click", function () {
-    createShoppingList(sortPrice()); // Pass the returned sorted list
+    printShoppingList(sortPrice());
   });
 }
 
@@ -29,32 +28,35 @@ function submitList(event) {
 
 // Create new object for values
 function createNewObject() {
-  // Får værdierne fra inputs
-  let inputItemNameValue = document.querySelector("#item_name").value;
+  // Værdierne gemmes i variabler
+  let inputItemNameValue = formatName(
+    document.querySelector("#item_name").value
+  );
   let inputItemPriceValue = Number(document.querySelector("#item_price").value);
+  let newItem;
 
   // Validerer værdierne,
-  // hvis navnet er tomt eller prisen er 0 el. negativ accepteres indkøb ikke
   if (inputItemPriceValue <= 0) {
     alert("Prisen er for lav");
   } else if (inputItemNameValue === "") {
-    alert("Udfyld indkøb");
+    alert("Udfyld vare");
   } else {
-    let newItem = {
+    newItem = {
       name: inputItemNameValue,
       price: inputItemPriceValue,
     };
-    console.log(newItem);
+    console.log(
+      `You have added ${newItem.name} for the neat price of ${newItem.price} kr.`
+    );
     updateShoppingList(newItem);
   }
 }
 
-// Updates the array and clears inputs
 function updateShoppingList(newListItem) {
-  // Tilføj nyt indkøb til array
+  // Tilføjer ny vare til array
   shoppingList.push(newListItem);
 
-  // Clearer inputfelter udover submit
+  // Clearer inputfelter (udover submit)
   const allInputs = document.querySelectorAll("input");
   allInputs.forEach((input) => {
     input.value = "";
@@ -64,17 +66,16 @@ function updateShoppingList(newListItem) {
   });
 
   // Udskriver listen
-  createShoppingList(shoppingList);
+  printShoppingList();
 }
 
-// Print objects
-function createShoppingList(shoppingList) {
+// Print shoppinglisten i DOM
+function printShoppingList() {
   let totalPrice = 0;
   const listElement = document.getElementById("shoppinglist");
   listElement.innerHTML = "";
 
-  // Hvis arrayet er kortere end 1, skal sorter knapperne ikke vises
-  // og prisen nulstilles.
+  // Sorteringsknapperne vises hvis listen er længere end to elementer
   if (shoppingList.length >= 2) {
     document.querySelector(".btn_container").style.display = "flex";
   } else if (shoppingList.length === 0) {
@@ -83,21 +84,18 @@ function createShoppingList(shoppingList) {
   }
 
   // For hvert objekt i arrayet, tilføjes et li-element hvori værdierne indsættes
-  // Der tilføjes en remove-knap til hvert element med en eventlistener,
-  // som starter removeItem funktionen.
-  // Dette li-element indsættes i listen.
+  // Der tilføjes en remove-knap til hvert element
+  // Li-elementet indsættes i DOM
   shoppingList.forEach((item, index) => {
     const listItem = document.createElement("li");
     listItem.textContent = `${item.name} - ${item.price} kr.`;
-
     const removeBtn = document.createElement("button");
     removeBtn.classList.add("removeBtn");
     removeBtn.textContent = "ⓧ";
     removeBtn.addEventListener("click", function () {
-      createShoppingList(removeItem(index)); // Call removeItem and pass the result to update the list
+      printShoppingList(removeItem(index));
     });
 
-    // Append the list item to the shopping list container
     listElement.appendChild(listItem);
     totalPrice = item.price + totalPrice;
     document.getElementById("totalprice").textContent =
@@ -114,11 +112,11 @@ function sortName() {
     return 0;
   });
 
-  return shoppingList; // Return the sorted list
+  return shoppingList;
 }
 function sortPrice() {
   shoppingList.sort((a, b) => a.price - b.price);
-  return shoppingList; // Return the sorted list
+  return shoppingList;
 }
 // Remover
 function removeItem(index) {
@@ -129,4 +127,9 @@ function removeItem(index) {
 function clearList() {
   shoppingList = [];
   return shoppingList;
+}
+
+// Format
+function formatName(name) {
+  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 }

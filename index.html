@@ -12,17 +12,22 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="style.css" />
-
-    <title>Project</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://cdn-icons-png.flaticon.com/512/1413/1413908.png"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/neobrutalismcss@latest" />
+    <title>Projekt A - Indkøbsliste</title>
   </head>
 
   <body>
     <div id="listWrapper">
-      <div id="newItem">
-        <label for="New item">Vare</label>
-        <input type="text" id="item_name" />
-        <label for="Price">Pris</label>
-        <input type="number" id="item_price" />
+      <div id="newItem" class="card">
+        <label for="Ny vare">Ny vare</label>
+        <input class="nb-input default" type="text" id="item_name" />
+        <label for="Pris i kroner">Pris i kroner</label>
+        <input class="nb-input default" type="number" id="item_price" />
         <input type="submit" id="submit" />
       </div>
 

@@ -8,12 +8,34 @@
   font-family: "Marck Script", cursive;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: black;
+}
+
 body {
   background-image: url("assets/how-to-value-a-grocery-store-or-supermarket-scaled.webp");
   font-family: "Marck Script", cursive;
   margin: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 100vh;
 }
 
@@ -33,25 +55,30 @@ body {
   height: 75%;
   background-color: rgba(255, 255, 255, 0.801);
   border: solid 2px black;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 #newItem input[type="text"],
 #newItem input[type="number"] {
   background-color: white;
   border: 2px solid black;
-  border-radius: 10px;
+  border-radius: 8px;
   outline: white;
   width: 300px;
   color: black;
-  margin-bottom: 30px;
   padding: 10px;
   font-family: "Marck Script", cursive;
   font-size: 2rem;
+  margin-bottom: 30px;
+  background-color: rgba(255, 255, 255, 0.801);
+  border-radius: 8px;
+  box-shadow: -3px 3px 0px #000000;
 }
 
 #newItem label {
+  font-weight: bold;
   font-size: 2rem;
+  margin-bottom: 10px;
 }
 
 #newItem input:focus {
@@ -59,14 +86,23 @@ body {
 }
 
 input[type="submit"] {
+  font-family: "Marck Script", cursive;
   cursor: pointer;
   background-color: white;
   border: 2px solid black;
   color: black;
   width: 200px;
   padding: 10px;
-  border-radius: 10px;
   font-size: 2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.801);
+  border-radius: 8px;
+  box-shadow: -3px 3px 0px #000000;
+}
+
+.nb-input.default {
+  font-family: "Marck Script", cursive !important;
 }
 
 input[type="submit"]:hover,
@@ -81,7 +117,7 @@ input[type="submit"]:hover,
   margin: 20px;
   width: 600px;
   height: 90%;
-  border-radius: 10px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -89,26 +125,21 @@ input[type="submit"]:hover,
   border: black 2px solid;
   position: relative;
   background-color: rgba(255, 255, 255, 0.801);
-  border-radius: 8px; /* Rounded corners for a modern look */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
-    /* Slight shadow below */ 0 1px 3px rgba(0, 0, 0, 0.08); /* Softer shadow above */
-}
 
-#list_container:hover {
-  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
+  box-shadow: -3px 3px 0px #000000;
+  filter: none;
 }
 
 #list_container ul {
   list-style: none;
   display: flex;
   position: absolute;
-  top: 150px;
+  top: 180px;
   flex-direction: column;
 }
 #list_container ul li {
   font-family: "Marck Script", cursive;
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin: 10px;
   display: flex;
   align-items: center;
@@ -124,15 +155,15 @@ input[type="submit"]:hover,
 }
 
 #list_container #totalprice {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   position: absolute;
   bottom: 10px;
-  right: 50px;
+  right: 20px;
 }
 
 .btn_container {
   position: fixed;
-  top: 150px;
+  top: 170px;
   display: none;
   flex-direction: row;
   justify-content: space-between;
@@ -144,12 +175,13 @@ input[type="submit"]:hover,
   background-color: transparent;
   border: solid 2px black;
   width: 120px;
-  height: 40px;
-  border-radius: 10px;
+  height: 50px;
+  border-radius: 8px;
+  box-shadow: -1px 1px 0px #000000;
 }
 
 .removeBtn {
-  margin: 0 10px;
+  margin: 0 20px;
   cursor: pointer;
   color: red;
   outline: none;
@@ -157,6 +189,6 @@ input[type="submit"]:hover,
   background-color: transparent;
   z-index: 10;
   cursor: pointer;
-  font-size: 1.3rem;
-  opacity: 0.3;
+  font-size: 1.2rem;
+  opacity: 0.5;
 }
