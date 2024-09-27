@@ -26,7 +26,7 @@ function submitList(event) {
   createNewObject();
 }
 
-// Create new object for values
+// Nyt object
 function createNewObject() {
   // Værdierne gemmes i variabler
   let inputItemNameValue = formatName(
@@ -52,6 +52,7 @@ function createNewObject() {
   }
 }
 
+// Objektet pushes til array
 function updateShoppingList(newListItem) {
   // Tilføjer ny vare til array
   shoppingList.push(newListItem);
@@ -69,7 +70,7 @@ function updateShoppingList(newListItem) {
   printShoppingList();
 }
 
-// Print shoppinglisten i DOM
+// Print i DOM
 function printShoppingList() {
   let totalPrice = 0;
   const listElement = document.getElementById("shoppinglist");
@@ -115,7 +116,11 @@ function sortName() {
   return shoppingList;
 }
 function sortPrice() {
-  shoppingList.sort((a, b) => a.price - b.price);
+  shoppingList.sort((a, b) => {
+    if (a.price < b.price) return -1;
+    if (a.price > b.price) return 1;
+    return 0;
+  });
   return shoppingList;
 }
 // Remover
